@@ -5,7 +5,7 @@
 This is a tiny package that takes a more or less standard graph and make its entities directly accesible (and iterable with standard methods) through memory, like so:
 
 ```
-import { Graph } from "./Graph"
+import { Graph } from "resolved-graph"
 
 const graph: Graph = {
     nodes: [
@@ -33,12 +33,15 @@ const graph: Graph = {
 ```
 
 Now, lets resolve it:
-```import { ResolvedGraph } from "./ResolvedGraph"
+```
+import { Graph, ResolvedGraph } from "resolved-graph"
+...
 const resolvedGraph = new ResolvedGraph(graph)
 ```
 
 ...And try it out for size:
 ```
+...
 for (const node of resolvedGraph.nodes) {
     for (const link of node.from) {
         const nextNode = link.to
