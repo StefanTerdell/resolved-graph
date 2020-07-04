@@ -4,6 +4,7 @@ import { Link } from "./Link"
 import { ResolvedLink } from "./ResolvedLink"
 import { ResolvedNode } from "./ResolvedNode"
 import { Graph } from "./Graph"
+import { equalsRight } from "./equalsRight"
 
 export class ResolvedGraph {
     private _nodes: {[id: string]: ResolvedNode}
@@ -16,16 +17,16 @@ export class ResolvedGraph {
     }
 
     get nodes() {
-        return Object.keys(this._nodes).map((key) => this._nodes[key])
+        return Object.values(this._nodes)
     }
 
     get links() {
-        return Object.keys(this._links).map((key) => this._links[key])
+        return Object.values(this._links)
     }
 
     private resolveNode(node: Node) {
-        this._nodes[node.id].to = Object.keys(this._links).map((key) => this._links[key]).filter(l => l.to === this._nodes[node.id])
-        this._nodes[node.id].from = Object.keys(this._links).map((key) => this._links[key]).filter(l => l.from === this._nodes[node.id])
+        this.node(node.id).to = Object.values(this._links).filter(l => l.to === this.node(node.id))
+        this.node(node.id).from = Object.values(this._links).filter(l => l.from === this.node(node.id))
     }
 
     private resolveLink(link: Link) {
@@ -47,8 +48,12 @@ export class ResolvedGraph {
     }
 
     mergeNode(node: Node) {
-        mutateDeepLeft(this._nodes[node.id], {[node.id]: node})
+        mutateDeepLeft(this._nodes, {[node.id]: node})
         this.resolveNode(node)
+    }
+
+    findNodes(query: object): ResolvedNode[] {
+        return this.nodes.filter(node => equalsRight(node, query))
     }
 
     setLink(link: Link) {
@@ -57,8 +62,12 @@ export class ResolvedGraph {
     }
 
     mergeLink(link: Link) {
-        mutateDeepLeft(this._links[link.id], {[link.id]: link})
+        mutateDeepLeft(this._links, {[link.id]: link})
         this.resolveLink(link)  
+    }
+
+    findLinks(query: object): ResolvedLink[] {
+        return this.links.filter(link => equalsRight(link, query))
     }
 
     node(id: string): ResolvedNode {
