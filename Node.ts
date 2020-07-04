@@ -1,3 +1,4 @@
 export interface Node {
-    id: string;
+    id: string
+    props: any
 }
