@@ -16,16 +16,16 @@ export class ResolvedGraph {
     }
 
     get nodes() {
-        return Object.values(this._nodes)
+        return Object.keys(this._nodes).map((key) => this._nodes[key])
     }
 
     get links() {
-        return Object.values(this._links)
+        return Object.keys(this._links).map((key) => this._links[key])
     }
 
     private resolveNode(node: Node) {
-        this._nodes[node.id].to = Object.values(this._links).filter(l => l.to === this._nodes[node.id])
-        this._nodes[node.id].from = Object.values(this._links).filter(l => l.from === this._nodes[node.id])
+        this._nodes[node.id].to = Object.keys(this._links).map((key) => this._links[key]).filter(l => l.to === this._nodes[node.id])
+        this._nodes[node.id].from = Object.keys(this._links).map((key) => this._links[key]).filter(l => l.from === this._nodes[node.id])
     }
 
     private resolveLink(link: Link) {
