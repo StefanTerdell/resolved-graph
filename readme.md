@@ -57,4 +57,4 @@ Viktoria is head over heels for Tommy
 ```
 
 
-As long as you use the standard methods found on the ResolvedGraph class, it should keep up with all resolutions for you. You can chuck in whatever properties you like on the nodes & links, as long as you stay away from 'id', 'to' and 'from'. I've put in a 'properties: any' for you just in case. This also tags along with the dissolve() method which otherwise breaks the resolutions to make it JSON safe. Keep in mind that no circuarity checks are made on 'properties' so that's up to you. GLHF
+As long as you use the standard methods found on the ResolvedGraph class, it should keep up with all resolutions for you. You can chuck in whatever properties you like on the nodes & links, as long as you stay away from 'id', 'to' and 'from'. The dissolve() method breaks the circular references and makes it safe for JSON. No checks are made on other properties so that's up to you. GLHF! <3

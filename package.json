@@ -1,6 +1,6 @@
 {
   "name": "resolved-graph",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Generates and updates a graph of nodes and links with resolved relationships for ease of traversal and extraction",
   "main": "dist/index.js",
   "files": [

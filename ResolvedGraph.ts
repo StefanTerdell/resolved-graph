@@ -52,6 +52,10 @@ export class ResolvedGraph {
         this.resolveNode(node)
     }
 
+    findNode(query: object): ResolvedNode {
+        return this.nodes.find(node => equalsRight(node, query))
+    }
+
     findNodes(query: object): ResolvedNode[] {
         return this.nodes.filter(node => equalsRight(node, query))
     }
@@ -64,6 +68,10 @@ export class ResolvedGraph {
     mergeLink(link: Link) {
         mutateDeepLeft(this._links, {[link.id]: link})
         this.resolveLink(link)  
+    }
+
+    findLink(query: object): ResolvedLink {
+        return this.links.find(link => equalsRight(link, query))
     }
 
     findLinks(query: object): ResolvedLink[] {
@@ -80,7 +88,7 @@ export class ResolvedGraph {
 
     dissolve(): Graph {
         return {
-            nodes: this.nodes.map(({id, properties}) => ({id, properties})),
+            nodes: this.nodes.map(node => ({...node, from: node.from.map(link => link.id), to: node.to.map(link => link.id)})),
             links: this.links.map(link => ({...link, from: link.from.id, to: link.to.id}))
         }
     }
