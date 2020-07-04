@@ -2,7 +2,8 @@
   "name": "resolved-graph",
   "version": "1.0.0",
   "description": "Generates and updates a graph of nodes and links with resolved relationships for ease of traversal and extraction",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "files": ["dist/"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
