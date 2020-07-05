@@ -1,4 +1,4 @@
 export interface Node {
   id: string
-  props: any
+  props?: { [key: string]: any }
 }
