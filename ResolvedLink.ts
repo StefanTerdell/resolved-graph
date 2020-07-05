@@ -1,6 +1,6 @@
-import { Node } from "./Node";
-import { ResolvedNode } from "./ResolvedNode";
+import { Node } from './Node'
+import { ResolvedNode } from './ResolvedNode'
 export interface ResolvedLink extends Node {
-    to: ResolvedNode;
-    from: ResolvedNode;
+  to: ResolvedNode
+  from: ResolvedNode
 }

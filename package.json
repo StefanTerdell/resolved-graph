@@ -13,7 +13,8 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^14.0.14",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "prettier": "^2.0.5"
   },
   "types": "dist/index.d.ts"
 }
