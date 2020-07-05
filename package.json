@@ -1,6 +1,6 @@
 {
   "name": "resolved-graph",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Generates and updates a graph of nodes and links with resolved relationships for ease of traversal and extraction",
   "main": "dist/index.js",
   "files": [
@@ -11,6 +11,10 @@
   },
   "author": "Stefan Terdell",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StefanTerdell/resolved-graph"
+  },
   "devDependencies": {
     "@types/node": "^14.0.14",
     "typescript": "^3.9.6",
