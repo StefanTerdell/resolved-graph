@@ -1,4 +1,4 @@
-export interface Node {
+export interface Node<T> {
   id: string
-  props?: { [key: string]: any }
+  data?: T
 }

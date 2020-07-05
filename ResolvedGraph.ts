@@ -6,35 +6,35 @@ import { ResolvedNode } from './ResolvedNode'
 import { Graph } from './Graph'
 import { equalsRight } from './equalsRight'
 
-export class ResolvedGraph<TNode extends ResolvedNode = ResolvedNode, TLink extends ResolvedLink = ResolvedLink> {
-  private _nodes: { [id: string]: TNode }
-  private _links: { [id: string]: TLink }
+export class ResolvedGraph<NodeData = any, LinkData = NodeData> {
+  private _nodes: { [id: string]: ResolvedNode<NodeData, LinkData> }
+  private _links: { [id: string]: ResolvedLink<LinkData, NodeData> }
 
-  constructor(graph?: Graph<Node, Link>) {
+  constructor(graph?: Graph<NodeData, LinkData>) {
     this._nodes = {}
     this._links = {}
     if (graph) this.mergeGraph(graph)
   }
 
-  get nodes() {
+  get nodes(): ResolvedNode<NodeData, LinkData>[] {
     return Object.values(this._nodes)
   }
 
-  get links() {
+  get links(): ResolvedLink<LinkData, NodeData>[] {
     return Object.values(this._links)
   }
 
-  private resolveNode(node: Node) {
+  private resolveNode(node: Node<NodeData>) {
     this.node(node.id).to = Object.values(this._links).filter((l) => l.to === this.node(node.id))
     this.node(node.id).from = Object.values(this._links).filter((l) => l.from === this.node(node.id))
   }
 
-  private resolveLink(link: Link) {
+  private resolveLink(link: Link<LinkData>) {
     this._links[link.id].to = this._nodes[link.to]
     this._links[link.id].from = this._nodes[link.from]
   }
 
-  mergeGraph(graph: Graph<Node, Link>) {
+  mergeGraph(graph: Graph<NodeData, LinkData>) {
     mutateDeepLeft(
       this._links,
       graph.links.reduce((acc, curr) => ({ ...acc, [curr.id]: curr }), {}),
@@ -48,54 +48,54 @@ export class ResolvedGraph<TNode extends ResolvedNode = ResolvedNode, TLink exte
     graph.nodes.forEach((node) => this.resolveNode(node))
   }
 
-  setNode(node: Node) {
-    this._nodes[node.id] = node as TNode
+  setNode(node: Node<NodeData>) {
+    this._nodes[node.id] = node as ResolvedNode<NodeData, LinkData>
     this.resolveNode(node)
   }
 
-  mergeNode(node: Node) {
+  mergeNode(node: Node<NodeData>) {
     mutateDeepLeft(this._nodes, { [node.id]: node })
     this.resolveNode(node)
   }
 
-  findNode(query: object): TNode {
+  findNode(query: object): ResolvedNode<NodeData, LinkData> {
     return this.nodes.find((node) => equalsRight(node, query))
   }
 
-  findNodes(query: object): TNode[] {
+  findNodes(query: object): ResolvedNode<NodeData, LinkData>[] {
     return this.nodes.filter((node) => equalsRight(node, query))
   }
 
-  node(id: string): TNode {
+  node(id: string): ResolvedNode<NodeData, LinkData> {
     return this._nodes[id]
   }
 
-  setLink(link: Link) {
+  setLink(link: Link<LinkData>) {
     this._links[link.id] = link as any
     this.resolveLink(link)
   }
 
-  mergeLink(link: Link) {
+  mergeLink(link: Link<LinkData>) {
     mutateDeepLeft(this._links, { [link.id]: link })
     this.resolveLink(link)
   }
 
-  findLink(query: object): TLink {
+  findLink(query: object): ResolvedLink<LinkData, NodeData> {
     return this.links.find((link) => equalsRight(link, query))
   }
 
-  findLinks(query: object): TLink[] {
+  findLinks(query: object): ResolvedLink<LinkData, NodeData>[] {
     return this.links.filter((link) => equalsRight(link, query))
   }
 
-  link(id: string): TLink {
+  link(id: string): ResolvedLink<LinkData, NodeData> {
     return this._links[id]
   }
 
-  dissolve<TNode extends Node, TLink extends Link>(): Graph<TNode, TLink> {
+  dissolve(): Graph<NodeData, LinkData> {
     return {
-      nodes: this.nodes.map((node) => ({ ...node, from: undefined, to: undefined } as any)),
-      links: this.links.map((link) => ({ ...link, from: link.from.id, to: link.to.id } as any)),
+      nodes: this.nodes.map((node) => ({ ...node, from: undefined, to: undefined } as Node<NodeData>)),
+      links: this.links.map((link) => ({ ...link, from: link.from.id, to: link.to.id } as Link<LinkData>)),
     }
   }
 }
