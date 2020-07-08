@@ -1,6 +1,7 @@
 # Resolved Graph
 
-### Check out the ResolvedGraph class for pretty self explanatory methods.
+### Check out the ResolvedGraph class for pretty self explanatory methods. Will update with some more js defs soon.
+### Npm package is here: https://www.npmjs.com/package/resolved-graph
 
 This is a tiny package that takes a more or less standard graph and make its entities directly accesible (and iterable with standard methods) through memory, like so:
 
