@@ -43,3 +43,5 @@ for (const node of resolvedGraph.nodes) {
     console.log([node.data.name, link.data.label, nextNode.data.name].join(' '))
   }
 }
+
+console.log(resolvedGraph.findNodes({ data: { name: 'Tommy' }, from: [{ to: { id: '2' } }] }))

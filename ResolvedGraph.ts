@@ -4,7 +4,7 @@ import { Link } from './Link'
 import { ResolvedLink } from './ResolvedLink'
 import { ResolvedNode } from './ResolvedNode'
 import { Graph } from './Graph'
-import { equalsRight } from './equalsRight'
+import { matchDeepRight } from './matchDeepRight'
 
 export class ResolvedGraph<NodeData = any, LinkData = NodeData> {
   private _nodes: { [id: string]: ResolvedNode<NodeData, LinkData> }
@@ -59,11 +59,11 @@ export class ResolvedGraph<NodeData = any, LinkData = NodeData> {
   }
 
   findNode(query: object): ResolvedNode<NodeData, LinkData> {
-    return this.nodes.find((node) => equalsRight(node, query))
+    return this.nodes.find((node) => matchDeepRight(node, query))
   }
 
   findNodes(query: object): ResolvedNode<NodeData, LinkData>[] {
-    return this.nodes.filter((node) => equalsRight(node, query))
+    return this.nodes.filter((node) => matchDeepRight(node, query))
   }
 
   node(id: string): ResolvedNode<NodeData, LinkData> {
@@ -81,11 +81,11 @@ export class ResolvedGraph<NodeData = any, LinkData = NodeData> {
   }
 
   findLink(query: object): ResolvedLink<LinkData, NodeData> {
-    return this.links.find((link) => equalsRight(link, query))
+    return this.links.find((link) => matchDeepRight(link, query))
   }
 
   findLinks(query: object): ResolvedLink<LinkData, NodeData>[] {
-    return this.links.filter((link) => equalsRight(link, query))
+    return this.links.filter((link) => matchDeepRight(link, query))
   }
 
   link(id: string): ResolvedLink<LinkData, NodeData> {
