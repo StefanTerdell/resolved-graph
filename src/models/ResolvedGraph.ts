@@ -1,10 +1,10 @@
-import { mutateDeepLeft } from './mutateDeepLeft'
+import { mutateDeepLeft } from '../utils/mutateDeepLeft'
 import { Node } from './Node'
 import { Link } from './Link'
 import { ResolvedLink } from './ResolvedLink'
 import { ResolvedNode } from './ResolvedNode'
 import { Graph } from './Graph'
-import { matchDeepRight } from './matchDeepRight'
+import { matchDeepRight } from '../utils/matchDeepRight'
 
 export class ResolvedGraph<NodeData = any, LinkData = NodeData> {
   private _nodes: { [id: string]: ResolvedNode<NodeData, LinkData> }
