@@ -2,6 +2,10 @@
 
 _Check out the ResolvedGraph class for pretty self explanatory methods. Will update with some more js defs soon. Npm package is here: https://www.npmjs.com/package/resolved-graph_
 
+![Tests](https://github.com/StefanTerdell/resolved-graph/workflows/tests/badge.svg)
+[![NPM Version](https://img.shields.io/npm/v/resolved-graph.svg)](https://npmjs.org/package/resolved-graph)
+[![NPM Downloads](https://img.shields.io/npm/dw/resolved-graph.svg)](https://npmjs.org/package/resolved-graph)
+
 ## Introduction
 
 This is a tiny package that takes a more or less standard graph and make its entities directly accesible (and iterable with standard methods) through memory, like so:
