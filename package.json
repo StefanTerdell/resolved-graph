@@ -2,7 +2,7 @@
   "name": "resolved-graph",
   "version": "1.3.0",
   "description": "Generates and updates a graph of nodes and links with resolved relationships for ease of traversal and extraction",
-  "main": "dist/src/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -29,5 +29,5 @@
     "ts-node": "^8.10.2",
     "typescript": "^3.9.6"
   },
-  "types": "dist/src/index.d.ts"
+  "types": "dist/index.d.ts"
 }
