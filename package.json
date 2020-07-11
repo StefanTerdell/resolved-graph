@@ -13,6 +13,16 @@
     "dry": "npm publish --dry-run",
     "pub": "npm publish"
   },
+  "keywords": [
+    "resolved",
+    "graph",
+    "traversable",
+    "iterable",
+    "usable",
+    "simple",
+    "small",
+    "tiny"
+  ],
   "author": "Stefan Terdell",
   "license": "ISC",
   "repository": {
