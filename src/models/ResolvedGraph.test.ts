@@ -1,6 +1,219 @@
 import { Graph } from './Graph'
 import { ResolvedGraph } from './ResolvedGraph'
 
+describe('Setting & merging nodes & links', () => {
+  test('Merging a node should maintain object references', () => {
+    const resolvedGraph = new ResolvedGraph<any>({
+      nodes: [
+        {
+          id: 'A',
+        },
+        {
+          id: 'B',
+        },
+      ],
+      links: [
+        {
+          id: '1',
+          from: 'A',
+          to: 'B',
+        },
+      ],
+    })
+
+    resolvedGraph.mergeNode({ id: 'B', data: { newData: true } })
+
+    const B = resolvedGraph.node('B')
+    const A = resolvedGraph.node('A')
+
+    expect(A.from[0].to).toBe(B)
+  })
+
+  test('Merging a node should maintain previous properties', () => {
+    const resolvedGraph = new ResolvedGraph<any>({
+      nodes: [
+        {
+          id: 'A',
+          data: {
+            oldData: true,
+          },
+        },
+      ],
+      links: [],
+    })
+
+    resolvedGraph.mergeNode({ id: 'A', data: { newData: true } })
+
+    const A = resolvedGraph.node('A')
+
+    expect(A.data).toHaveProperty('oldData')
+    expect(A.data).toHaveProperty('newData')
+  })
+
+  test('Setting a node should maintain object references', () => {
+    const resolvedGraph = new ResolvedGraph<any>({
+      nodes: [
+        {
+          id: 'A',
+        },
+        {
+          id: 'B',
+        },
+      ],
+      links: [
+        {
+          id: '1',
+          from: 'A',
+          to: 'B',
+        },
+      ],
+    })
+
+    resolvedGraph.setNode({ id: 'B', data: { newData: true } })
+
+    const B = resolvedGraph.node('B')
+    const A = resolvedGraph.node('A')
+
+    expect(A.from[0].to).toBe(B)
+  })
+
+  test('Setting a node should delete previous properties', () => {
+    const resolvedGraph = new ResolvedGraph<any>({
+      nodes: [
+        {
+          id: 'A',
+          data: {
+            oldData: true,
+          },
+        },
+      ],
+      links: [],
+    })
+
+    resolvedGraph.setNode({ id: 'A', data: { newData: true } })
+
+    const A = resolvedGraph.node('A')
+
+    expect(A.data).not.toHaveProperty('oldData')
+    expect(A.data).toHaveProperty('newData')
+  })
+
+  test('Merging a link should maintain object references', () => {
+    const resolvedGraph = new ResolvedGraph<any>({
+      nodes: [
+        {
+          id: 'A',
+        },
+        {
+          id: 'B',
+        },
+      ],
+      links: [
+        {
+          id: '1',
+          from: 'A',
+          to: 'B',
+        },
+      ],
+    })
+
+    resolvedGraph.mergeLink({ id: '1', from: 'A', to: 'B', data: { newData: true } })
+
+    const B = resolvedGraph.node('B')
+    const A = resolvedGraph.node('A')
+
+    expect(A.from[0].to).toBe(B)
+    expect(A.from[0].data).toHaveProperty('newData')
+  })
+
+  test('Merging a link should maintain previous properties', () => {
+    const resolvedGraph = new ResolvedGraph<any>({
+      nodes: [
+        {
+          id: 'A',
+        },
+        {
+          id: 'B',
+        },
+      ],
+      links: [
+        {
+          id: 'LinkBoi',
+          from: 'A',
+          to: 'B',
+          data: {
+            oldData: true,
+          },
+        },
+      ],
+    })
+
+    resolvedGraph.mergeLink({ id: 'LinkBoi', from: 'A', to: 'B', data: { newData: true } })
+
+    const LinkBoi = resolvedGraph.link('LinkBoi')
+
+    expect(LinkBoi.data).toHaveProperty('oldData')
+    expect(LinkBoi.data).toHaveProperty('newData')
+  })
+
+  test('Setting a link should maintain object references', () => {
+    const resolvedGraph = new ResolvedGraph<any>({
+      nodes: [
+        {
+          id: 'A',
+        },
+        {
+          id: 'B',
+        },
+      ],
+      links: [
+        {
+          id: '1',
+          from: 'A',
+          to: 'B',
+        },
+      ],
+    })
+
+    resolvedGraph.setLink({ id: '1', from: 'A', to: 'B', data: { newData: true } })
+
+    const A = resolvedGraph.node('A')
+    const link = resolvedGraph.link('1')
+
+    expect(A.from[0]).toBe(link)
+  })
+
+  test('Setting a node should delete previous properties', () => {
+    const resolvedGraph = new ResolvedGraph<any>({
+      nodes: [
+        {
+          id: 'A',
+        },
+        {
+          id: 'B',
+        },
+      ],
+      links: [
+        {
+          id: '1',
+          from: 'A',
+          to: 'B',
+          data: {
+            oldData: true,
+          },
+        },
+      ],
+    })
+
+    resolvedGraph.setLink({ id: '1', from: 'A', to: 'B', data: { newData: true } })
+
+    const link = resolvedGraph.link('1')
+
+    expect(link.data).not.toHaveProperty('oldData')
+    expect(link.data).toHaveProperty('newData')
+  })
+})
+
 describe('Readme examples', () => {
   test('The first one with only IDs should log out the correct answers', () => {
     /////
