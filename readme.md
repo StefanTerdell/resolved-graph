@@ -1,6 +1,6 @@
 # Resolved Graph
 
-_Check out the ResolvedGraph class for pretty self explanatory methods. Will update with some more js defs soon. Npm package is here: https://www.npmjs.com/package/resolved-graph_
+> Also check out Resolved Graph Query, a fledgling query language for this package available [here](https://npmjs.org/package/resolved-graph-query)
 
 [![Build](https://img.shields.io/github/workflow/status/stefanterdell/resolved-graph/Tests)](https://github.com/StefanTerdell/resolved-graph)
 [![NPM Version](https://img.shields.io/npm/v/resolved-graph.svg)](https://npmjs.org/package/resolved-graph)
