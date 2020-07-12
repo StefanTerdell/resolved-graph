@@ -66,7 +66,7 @@ Viktoria is head over heels for Tommy
 
 ## Defining node & link types
 
-You can define the type of the 'data' prop on both nodes and links. This will preserve intellisense event after resolving the graph, making it easy to traverse your data in code. However - as with any self respecting JS application - there is no runtime typechecking ;)
+You can define the type of the 'data' prop on both nodes and links. This will preserve intellisense even after resolving the graph, making it easy to traverse your data in code. However - as with any self respecting JS application - there is no runtime typechecking ;)
 
 ```typescript
 //...
@@ -129,10 +129,10 @@ Expected output:
 ]
 ```
 
-And yes, I am working on a (simple) query language for this ;)
+As mentioned above, you can use [Resolved Graph Query](https://npmjs.org/package/resolved-graph-query) for more advanced use cases such as recursive queries
 
 ## Disclaimer
 
-As long as you use the standard methods found on the ResolvedGraph class, it should keep up with all resolutions for you. You can chuck in whatever properties you like on the nodes & links, as long as you stay away from 'id', 'to' and 'from'. The dissolve() method breaks the circular references and makes it safe for JSON. No checks are made on other properties so that's up to you.
+As long as you use the standard methods found on the ResolvedGraph class, it should keep up with all resolutions for you. You can chuck in whatever properties you like on the nodes & links, as long as you stay away from 'id', 'to' and 'from'. The dissolve() method breaks the circular references and returns a simpler Graph object safe for JSON. No checks are made on other properties so that's up to you.
 
 This project is currently only for my amusement. With that said, I'm glad you found it and welcome any requests!
